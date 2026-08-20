@@ -59,7 +59,7 @@ nectar_project/
 ├── 10_dax/
 ├── 11_presentation/
 └── docs/
-└── Project_demo/
+└── Project_demo_video/
 
 ```
 
