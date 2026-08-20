@@ -409,37 +409,11 @@ Contains event analytics including:
 -   ingestion_timestamp
 -   source_file
 
-# 5. Gold Data Model
 
-The dimensional model connects descriptive dimensions to analytical
-facts.
 
-``` text
-gold_dim_site
-      │
-      ▼
-gold_dim_building
-      │
-      ▼
-gold_dim_asset
-   │       │
-   ▼       ▼
-gold_fact_telemetry   gold_fact_event
-          │
-          ▼
-   gold_fact_energy
 
-gold_dim_date
-     │
-     ├── gold_fact_telemetry
-     ├── gold_fact_energy
-     └── gold_fact_event
-```
 
-This structure supports analysis by site, building, asset, sensor,
-event, and date.
-
-# 6. Analytics and Business Use Cases
+# 5. Analytics and Business Use Cases
 
 The Gold layer supports:
 
