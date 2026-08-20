@@ -447,38 +447,9 @@ The reporting layer is intended for operational dashboards, historical
 reporting, energy analytics, asset performance, and event/fault
 analysis.
 
-# 8. Master Pipeline and Failure Handling
 
-The end-to-end orchestration is:
 
-``` text
-Master Pipeline
-      ↓
-Bronze
-      ↓
-Silver
-      ↓
-DQ Validation
-      ↓
-Gold
-      ↓
-Power BI
-```
-
-Pipeline monitoring is performed using Fabric pipeline run history and
-activity-level execution status.
-
-A downstream stage should only be considered successful when its
-upstream dependency has completed successfully.
-
-The project also documents failure scenarios and recovery considerations
-in:
-
-``` text
-5.master_pipeline_failure_reason/
-```
-
-# 9. Production-Oriented Design
+# 8. Production-Oriented Design
 
 The project applies these production principles:
 
@@ -492,10 +463,9 @@ The project applies these production principles:
 -   Data-quality validation before analytical consumption
 -   Quarantine handling for invalid records
 -   Dimensional/star-schema Gold modeling
--   Pipeline monitoring and failure handling
 -   Power BI consumption from curated Gold data
 
-# 10. Assumptions
+# 9. Assumptions
 
 1.  The source system provides `telemetry.csv`, `events.csv`, and
     `asset_metadata.csv`.
@@ -519,7 +489,7 @@ The project applies these production principles:
 12. Gold metrics are derived from curated and validated records
     according to the implemented project logic.
 
-# 11. End-to-End Example
+# 10. End-to-End Example
 
 A telemetry record follows this path:
 
@@ -571,7 +541,7 @@ Gold processing
 Power BI
 ```
 
-# 12. Project Outcome
+# 11. Project Outcome
 
 The final solution provides an end-to-end Microsoft Fabric data
 engineering architecture combining:
