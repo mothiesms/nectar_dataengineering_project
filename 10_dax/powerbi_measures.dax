@@ -1,0 +1,62 @@
+-- NECTAR Power BI Measures
+
+Total Sites =
+DISTINCTCOUNT ( gold_dim_site[site_id] )
+
+Total Assets =
+DISTINCTCOUNT ( gold_dim_asset[asset_id] )
+
+Total Readings =
+COUNTROWS ( gold_fact_telemetry )
+
+Total Faults =
+COUNTROWS ( gold_fact_event )
+
+Assets with Faults =
+COUNTROWS (
+    FILTER (
+        VALUES ( gold_dim_asset[asset_id] ),
+        CALCULATE ( [Total Faults] ) > 0
+    )
+)
+
+Total Energy =
+SUM ( gold_fact_energy[hourly_energy_consumption] )
+
+Average Power Consumption =
+AVERAGE ( gold_fact_energy[avg_power_consumption] )
+
+Average Readings per Hour =
+AVERAGE ( gold_fact_energy[reading_count] )
+
+High Faults =
+CALCULATE (
+    [Total Faults],
+    gold_fact_event[severity] = "HIGH"
+)
+
+Medium Faults =
+CALCULATE (
+    [Total Faults],
+    gold_fact_event[severity] = "MEDIUM"
+)
+
+Low Faults =
+CALCULATE (
+    [Total Faults],
+    gold_fact_event[severity] = "LOW"
+)
+
+Fault Rate % =
+DIVIDE ( [Total Faults], [Total Readings], 0 ) * 100
+
+-- Optional if dq_quality_report is loaded into Power BI:
+DQ Failed Records =
+SUM ( dq_quality_report[failed_records] )
+
+DQ Failure % =
+DIVIDE (
+    [DQ Failed Records],
+    SUM ( dq_quality_report[total_records] ),
+    0
+) * 100
